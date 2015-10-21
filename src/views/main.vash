@@ -1,0 +1,12 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@model.title</title>
+    @html.include('_appcss', { min: model.min })
+</head>
+<body>
+    <div id="body">@html.raw(model.content)</div>
+    @html.include('_appjs', { min: model.min })
+</body>
+</html>

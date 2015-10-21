@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@model.title</title>
+    @html.include('_appcss', { min: model.min })
+</head>
+<body>
+    <h2>@model.title</h2>
+
+    <p class="lead">
+        Help message.
+    </p>
+</body>
+</html>
