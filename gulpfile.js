@@ -10,6 +10,7 @@ var gulp = require("gulp"),
     cssmin = require("gulp-cssmin"),
     gulpif = require("gulp-if"),
     uglify = require("gulp-uglify"),
+    less = require("gulp-less"),
     browserify = require('browserify'),
     browserifyShim = require('browserify-shim'),
     eventStream = require('event-stream'),
@@ -40,6 +41,7 @@ var build = {
             // Styles
             styles: paths.source + "styles/**/*.css",
             stylesMin: paths.source + "styles/**/*.min.css",
+            less: [paths.source + "styles/*.less"],
             
             // Scripts
             scripts: paths.source + "scripts/**/*.js",
@@ -71,6 +73,7 @@ var build = {
             ts: paths.output,
             images: paths.output + 'images',
             root: paths.output,
+            styles: paths.output + 'styles',
             scripts: paths.output + 'scripts',
             polyfills: paths.output + 'polyfills',
             views: paths.output + 'views'
@@ -121,6 +124,16 @@ gulp.task("min", [ "scripts", "styles" ]);
 //
 // Compilation and packaging
 //
+
+gulp.task('less', function () {
+    return gulp.src(build.input.files.less)
+        .pipe(less()).on('error', function (err) {
+            console.error(err);
+            this.emit('end'); // emit the end event, to properly end the task.
+        })
+        .pipe(gulpif(argv.production || argv.staging, cssmin()))
+        .pipe(gulp.dest(build.output.dirs.styles));
+});
 
 gulp.task('typescript', function () {
     var tsResult = gulp
@@ -208,7 +221,7 @@ gulp.task('views', function () {
 gulp.task('copy', ['scripts', 'styles', /* 'extern', 'polyfills', */ 'images', 'root', 'views'], function(){});
 
 gulp.task('compile', function(callback) {
-    runSequence('typescript', ['vendor', 'app'], callback);
+    runSequence(['typescript', 'less'], ['vendor', 'app'], callback);
 });
 
 gulp.task('recompile', function(callback) {
@@ -219,6 +232,7 @@ gulp.task('watch', function() {
     gulp.watch(build.input.files.ts, ['recompile']);
     gulp.watch(build.input.files.views, ['views']);
     gulp.watch(build.input.files.styles, ['styles']);
+    gulp.watch(build.input.files.less, ['less']);
 });
 
 // The default task (called when running 'gulp' from the command line).

@@ -1,5 +1,5 @@
 
-# Isomorphic React TypeScript Starter Project
+# Isomorphic React TypeScript Starter
 
 This project includes a working example of React, React Router, and TypeScript.
 TypeScript 1.6 added much needed support for JSX parsing, in the form of TSX files.
@@ -34,13 +34,21 @@ This is a basic starter project with minimal views and components.
 
 ## Setup
 
-Install Node modules
+### Install Node modules
 
 ```
 > npm update
 ```
 
-Install TypeScript typings
+### Install TypeScript definitions
+
+If you don't already have the TypeScript Definition manager, install it:
+
+```
+> npm install tsd -g
+```
+
+Next, get the definition files that are used by the project.
 
 ```
 > tsd update --save
