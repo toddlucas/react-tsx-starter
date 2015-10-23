@@ -10,6 +10,15 @@ The vendor file currently includes react (or react with addons) and react-router
 This separation speeds up the build process and can result in fewer client downloads when new builds are released.
 The gulp build process works with gulp.watch.
 
+This is a basic starter project with a minimal number of views and components.
+As much as possible, the project uses ES6 conventions, which are supported by TypeScript.
+This includes the import statement and object destructuring, for example.
+
+Many recent React examples are written in ES6 and make use of [Babel](https://babeljs.io/).
+These are almost entirely compatible with this TypeScript based process.
+Most of the React views and components in this project are written as ES6 classes.
+However, it's also possible to use classic React components, as demonstrated by the HomeView.
+
 ## Features
 
 * React with React Router
@@ -30,11 +39,22 @@ This template supports the following versions for key dependencies:
 
 # Usage
 
-This is a basic starter project with minimal views and components.
+You'll need a few frameworks and utilities to be installed before starting.
+
+## Prerequisites
+
+You'll need the following prior to setup:
+
+* [Node.js](https://nodejs.org/) should be installed
+* [TypeScript](http://www.typescriptlang.org/) version 1.6 or greater
+* [TSD](http://definitelytyped.org/tsd/), the TypeScript Definition manager
 
 ## Setup
 
 ### Install Node modules
+
+This will get all the packages required for development and run time,
+as defined in the packages.json file.
 
 ```
 > npm update
@@ -42,13 +62,7 @@ This is a basic starter project with minimal views and components.
 
 ### Install TypeScript definitions
 
-If you don't already have the TypeScript Definition manager, install it:
-
-```
-> npm install tsd -g
-```
-
-Next, get the definition files that are used by the project.
+Get the definition files that are used by the project.
 
 ```
 > tsd update --save
@@ -84,4 +98,4 @@ Run this command:
 > node server
 ```
 
-Then open a browser and navigate to http://localhost:3000 to view.
+Then open a browser and navigate to [localhost:3000](http://localhost:3000) to view.

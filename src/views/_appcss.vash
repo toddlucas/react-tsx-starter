@@ -1,4 +1,1 @@
-﻿@{
-    var mincss = model.min + '.css';
-}
-    <link href="/styles/site@mincss" rel="stylesheet" media="screen">
+﻿    <link href="/styles/site.css" rel="stylesheet" media="screen">

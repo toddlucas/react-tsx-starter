@@ -1,6 +1,3 @@
-﻿@{
-    var minjs = model.min + '.js';
-}
-    <script src="/scripts/vendor@minjs"></script>
+﻿    <script src="/scripts/vendor.js"></script>
     <script src="/scripts/app.js"></script>
-    <script src="/scripts/site@minjs"></script>
+    <script src="/scripts/site.js"></script>
