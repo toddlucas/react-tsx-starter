@@ -4,8 +4,8 @@
 This project includes a working example of React, React Router, and TypeScript.
 TypeScript 1.6 added much needed support for JSX parsing, in the form of TSX files.
 
-All the code is in TypeScript, written as either .ts or .tsx files. 
-The gulp-based build generates a browserifeid client file which is separate from the vendor file.
+All the code is in TypeScript, written as either `.ts` or `.tsx` files. 
+The gulp-based build generates a browserified client file which is separate from the vendor file.
 The vendor file currently includes react (or react with addons) and react-router.
 This separation speeds up the build process and can result in fewer client downloads when new builds are released.
 The gulp build process works with gulp.watch.
@@ -54,7 +54,7 @@ You'll need the following prior to setup:
 ### Install Node modules
 
 This will get all the packages required for development and run time,
-as defined in the packages.json file.
+as defined in the `package.json` file.
 
 ```
 > npm update
@@ -68,8 +68,8 @@ Get the definition files that are used by the project.
 > tsd update --save
 ```
 
-The save flag is required to generate the typings\tsd.d.ts file,
-which is used by src\server.ts to resolve all application TypeScript references.
+The `--save` flag is required to generate the `typings\tsd.d.ts` file,
+which is used by `src\server.ts` to resolve all application TypeScript references.
 
 ## Build
 
@@ -98,4 +98,4 @@ Run this command:
 > node server
 ```
 
-Then open a browser and navigate to [localhost:3000](http://localhost:3000) to view.
+Then open a browser and navigate to [http://localhost:3000](http://localhost:3000) to view.
