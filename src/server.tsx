@@ -4,6 +4,7 @@ import express = require('express');
 import http = require('http');
 import path = require('path');
 import React = require('react');
+import * as ReactDOMServer from 'react-dom/server';
 import Router = require('react-router');
 
 import routes from './app/routes';
@@ -30,7 +31,7 @@ app.get('/help', function (req, res) {
 
 app.use(function(req, res, next) {
     Router.run(routes, req.path, function(Handler, state) {
-        var html = React.renderToString(<Handler />);
+        var html = ReactDOMServer.renderToString(<Handler />);
         return res.render('main', { content: html, title: 'Home', min: min });
     });
 });

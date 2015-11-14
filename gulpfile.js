@@ -49,6 +49,7 @@ var build = {
             vendor_js: [
                 // 'react/addons',
                 'react',
+                'react-dom',
                 'react-router'
             ],
             extern_js: [
