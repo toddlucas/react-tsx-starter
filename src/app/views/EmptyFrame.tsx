@@ -1,9 +1,9 @@
 
 import * as React from 'react';
-import { RouteHandler } from 'react-router';
 
 export default class EmptyFrame extends React.Component<any, any> {
     render() {
-        return <RouteHandler {...this.props}/>;
+        // Pass down any props by merging them with those of the children.
+        return React.cloneElement(this.props.children, this.props);
     }
 }

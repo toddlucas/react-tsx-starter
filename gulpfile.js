@@ -47,7 +47,7 @@ var build = {
             scripts: paths.source + "scripts/**/*.js",
             scriptsMin: paths.source + "scripts/**/*.min.js",
             vendor_js: [
-                // 'react/addons',
+                'history',
                 'react',
                 'react-dom',
                 'react-router'

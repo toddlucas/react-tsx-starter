@@ -33,9 +33,9 @@ However, it's also possible to use classic React components, as demonstrated by 
 
 This template supports the following versions for key dependencies:
 
-* React 0.14.2
-* React Router 0.13.5
-* TypeScript 1.6
+* [React](https://facebook.github.io/react/) 0.14.5
+* [React Router](https://github.com/rackt/react-router) 1.0
+* [TypeScript](http://www.typescriptlang.org/) 1.7
 
 # Usage
 

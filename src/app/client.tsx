@@ -1,9 +1,10 @@
 ﻿
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as Router from 'react-router';
+import { Router } from 'react-router';
+import * as History from 'history';
 import routes from './routes';
 
-Router.run(routes, Router.HistoryLocation, function (Handler) {
-    ReactDOM.render(<Handler />, document.getElementById('body'));
-});
+let history = History.createHistory();
+
+ReactDOM.render(<Router history={history}>{routes}</Router>, document.getElementById('body'));
