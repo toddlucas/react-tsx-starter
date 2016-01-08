@@ -164,6 +164,7 @@ gulp.task('vendor', function() {
         })
         .transform(browserifyShim)
         .require(build.input.files.vendor_js)
+        .add(build.input.files.polyfill_js)
         .bundle()
             .on('error', console.error.bind(console)) 
         .pipe(source('vendor.js'))
@@ -221,7 +222,7 @@ gulp.task('views', function () {
         .pipe(gulp.dest(build.output.dirs.views));
 });
 
-gulp.task('copy', ['scripts', 'styles', /* 'extern', 'polyfills', */ 'images', 'root', 'views'], function(){});
+gulp.task('copy', ['scripts', 'styles', /* 'extern', */ 'polyfills', 'images', 'root', 'views'], function(){});
 
 gulp.task('compile', function(callback) {
     runSequence(['typescript', 'less'], ['vendor', 'app'], callback);

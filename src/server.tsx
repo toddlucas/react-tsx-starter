@@ -1,5 +1,7 @@
 ﻿/// <reference path="../typings/tsd.d.ts"/>
 
+require('./polyfills/Object.assign');
+
 import express = require('express');
 import http = require('http');
 import path = require('path');
