@@ -19,9 +19,13 @@ These are almost entirely compatible with this TypeScript based process.
 Most of the React views and components in this project are written as ES6 classes.
 However, it's also possible to use classic React components, as demonstrated by the HomeView.
 
+This starter also includes an example of how to use Redux with TypeScript.
+In order to keep the starter as clean as possible, the Redux example is on a branch.
+
 ## Features
 
 * React with React Router
+* Redux (on a separate branch)
 * TypeScript TSX
 * Isomorphic between server and client
 * Client app.js is browserified
@@ -35,6 +39,7 @@ This template supports the following versions for key dependencies:
 
 * [React](https://facebook.github.io/react/) 0.14.5
 * [React Router](https://github.com/rackt/react-router) 1.0
+* [Redux](https://github.com/rackt/redux) 3.0 ([redux branch](https://github.com/toddlucas/react-tsx-starter/tree/redux))
 * [TypeScript](http://www.typescriptlang.org/) 1.7
 
 # Usage
