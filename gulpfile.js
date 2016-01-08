@@ -50,7 +50,9 @@ var build = {
                 'history',
                 'react',
                 'react-dom',
-                'react-router'
+                'react-router',
+                'redux',
+                'react-redux'
             ],
             extern_js: [
                 'node_modules/q/q.js',

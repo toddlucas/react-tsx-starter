@@ -13,7 +13,9 @@
     "history": "^1.13.1",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
+    "react-redux": "^4.0.6",
     "react-router": "^1.0",
+    "redux": "^3.0.5",
     "vash": "^0.11.0"
   },
   "devDependencies": {
