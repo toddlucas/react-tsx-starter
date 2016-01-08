@@ -5,10 +5,12 @@ import http = require('http');
 import path = require('path');
 import React = require('react');
 import * as ReactDOMServer from 'react-dom/server';
+import { Provider } from 'react-redux';
 import { match, RoutingContext } from 'react-router'
 import * as History from 'history';
 
 import routes from './app/routes';
+import store from './app/store';
 
 var app = express();
 
@@ -34,7 +36,9 @@ app.use(function(req, res, next) {
     const location = History.createLocation(req.path);
     
     match({ routes, location }, (error, redirectLocation, renderProps: any) => {
-        var html = ReactDOMServer.renderToString(<RoutingContext {...renderProps} />)
+        var html = ReactDOMServer.renderToString(<Provider store={store}>
+            <RoutingContext {...renderProps} />
+        </Provider>)
         return res.render('main', { content: html, title: 'Home', min: min });
     });
 });
