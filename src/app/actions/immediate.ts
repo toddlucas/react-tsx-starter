@@ -1,8 +1,8 @@
 
-export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
+export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 
 export function incrementCounter() {
     return {
-        type: INCREMENT_COUNTER,
-    }
+        type: INCREMENT_COUNTER
+    };
 }
