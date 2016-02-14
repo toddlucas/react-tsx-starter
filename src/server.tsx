@@ -8,8 +8,8 @@ import path = require('path');
 import React = require('react');
 import * as ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { match, RoutingContext } from 'react-router'
-import * as History from 'history';
+import { match, RouterContext } from 'react-router'
+import { createLocation } from 'history';
 
 import routes from './app/routes';
 import store from './app/store';
@@ -35,11 +35,11 @@ app.get('/help', function (req, res) {
 })
 
 app.use(function(req, res, next) {
-    const location = History.createLocation(req.path);
+    const location = createLocation(req.url);
     
     match({ routes, location }, (error, redirectLocation, renderProps: any) => {
         var html = ReactDOMServer.renderToString(<Provider store={store}>
-            <RoutingContext {...renderProps} />
+            <RouterContext {...renderProps} />
         </Provider>)
         return res.render('main', { content: html, title: 'Home', min: min });
     });

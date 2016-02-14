@@ -7,9 +7,8 @@ import * as History from 'history';
 import routes from './routes';
 import store from './store';
 
-let history = History.createHistory();
 
 ReactDOM.render(<Provider store={store}>
-        <Router history={history}>{routes}</Router>
-    </Provider>, 
+        <Router history={browserHistory}>{routes}</Router>
+    </Provider>,
     document.getElementById('body'));
