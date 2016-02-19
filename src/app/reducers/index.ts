@@ -11,7 +11,7 @@ import { ISampleState } from './sample';
 // subscribe to store changes.
 //
 
-export interface IState {
+export interface IStore {
     sample: ISampleState;
 }
 

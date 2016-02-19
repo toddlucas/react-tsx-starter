@@ -1,22 +1,23 @@
 ﻿
 import * as React from 'react';
 import { incrementCounter } from '../actions/immediate';
-import { IState, IStoreContext } from '../reducers';
+import { IStore, IStoreContext } from '../reducers';
 
 export interface IAboutState {
     loaded: boolean,
-    counter: number
+    counter?: number
 }
 
-function mapStoreToState(state: IState): IAboutState {
+// The mapping function tailors the store's state to the view's state.
+function mapStateFromStore(store: IStore): IAboutState {
     return { 
         loaded: true,
-        counter: state.sample.counter
+        counter: store.sample.counter
     };
 }
 
-export default class AboutView extends React.Component<IAboutState, any> {
-   static contextTypes: React.ValidationMap<any> = {
+export default class AboutView extends React.Component<any, IAboutState> {
+    static contextTypes: React.ValidationMap<any> = {
         store: React.PropTypes.object
     }
     
@@ -29,19 +30,20 @@ export default class AboutView extends React.Component<IAboutState, any> {
     }
     
     componentDidMount() {
-        var state = mapStoreToState(this.context.store.getState());
-        this.setState(state);
+        // This helper wraps common code so we can initialze state and then subscribe.
+        this.setStateFromStore();
             
-        this.unsubscribe = this.context.store.subscribe(() => {
-            var state = mapStoreToState(this.context.store.getState());
-            this.setState(state);
-        });
+        this.unsubscribe = this.context.store.subscribe(this.setStateFromStore.bind(this));
     }
     
     componentWillUnmount() {
         if (this.unsubscribe) {
             this.unsubscribe();
         }
+    }
+    
+    setStateFromStore() {
+        this.setState(mapStateFromStore(this.context.store.getState()));
     }
     
     incrementCounter() {
@@ -55,6 +57,14 @@ export default class AboutView extends React.Component<IAboutState, any> {
             <p>
                 This project includes a working example of React, React Router, and TypeScript.
                 It is <a href="https://github.com/toddlucas/react-tsx-starter">hosted on Github</a>.
+            </p>
+            
+            <h2>Redux example</h2>
+            <p>
+                This counter uses actions to update the store.
+                This sample uses interfaces to give the store a typed shape.
+                The reducers and mapping functions use these interfaces to help preserve that shape.
+                This typing information flows from the store to each component's state, making it easier to avoid errors.
             </p>
             <p>Count: {this.state.counter}</p>
             <p>
