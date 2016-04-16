@@ -37,9 +37,9 @@ In order to keep the starter as clean as possible, the Redux example is on a bra
 
 This template supports the following versions for key dependencies:
 
-* [React](https://facebook.github.io/react/) 0.14.7
-* [React Router](https://github.com/rackt/react-router) 2.0
-* [Redux](https://github.com/rackt/redux) 3.3 ([redux branch](https://github.com/toddlucas/react-tsx-starter/tree/redux))
+* [React](https://facebook.github.io/react/) 15.0
+* [React Router](https://github.com/rackt/react-router) 2.2
+* [Redux](https://github.com/rackt/redux) 3.4 ([redux branch](https://github.com/toddlucas/react-tsx-starter/tree/redux))
 * [TypeScript](http://www.typescriptlang.org/) 1.6 - 1.8
 
 # Usage
@@ -104,3 +104,7 @@ Run this command:
 ```
 
 Then open a browser and navigate to [http://localhost:3000](http://localhost:3000) to view.
+
+## License
+
+[BSD](https://github.com/toddlucas/react-tsx-starter/blob/master/LICENSE) (the same as React)
