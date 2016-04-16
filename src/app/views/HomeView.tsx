@@ -15,7 +15,7 @@ var HomeView = React.createClass({
     render: function() {
         var loading = this.state.loaded ? "" : " (loading...)";
         return <div>
-            <h1>HomeView {loading}</h1>
+            <h2>HomeView {loading}</h2>
             <Hello name="world" />
             <div><Link to="/about">About</Link></div>
         </div>;

@@ -9,12 +9,13 @@ import React = require('react');
 import * as ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { match, RouterContext } from 'react-router'
-import { createLocation } from 'history';
+import * as history from 'history';
 
 import routes from './app/routes';
 import store from './app/store';
 
 var app = express();
+var memoryHistory = history.createMemoryHistory();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -35,7 +36,7 @@ app.get('/help', function (req, res) {
 })
 
 app.use(function(req, res, next) {
-    const location = createLocation(req.url);
+    const location = memoryHistory.createLocation(req.url);
     
     match({ routes, location }, (error, redirectLocation, renderProps: any) => {
         var html = ReactDOMServer.renderToString(<Provider store={store}>
