@@ -10,11 +10,11 @@
   "browserify-shim": {},
   "dependencies": {
     "express": "^4.13.4",
-    "history": "^2.0.2",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
+    "history": "^3.0.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
     "react-router": "^2.2.4",
-    "vash": "^0.11.3"
+    "vash": "^0.12.1"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
@@ -34,6 +34,6 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",
-    "yargs": "~3.10.0"
+    "yargs": "^4.8.0"
   }
 }
