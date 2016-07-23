@@ -77,7 +77,7 @@ If you don't already having `typings` installed, you can install using npm (-g f
 This will pull down the typings files and put them into the `typings` directory, along with `index.d.ts`.
 This file is included via a `///` comment by `src\server.ts` to resolve all application TypeScript references.
 
-If you're using `tsd`, this project still contains `tsd.json' but it will be removed in the near future.
+If you're using `tsd`, this project still contains `tsd.json` but it will be removed in the near future.
 You can run the following command to install using `tsd`.
 
 ```
@@ -85,7 +85,7 @@ You can run the following command to install using `tsd`.
 ```
 
 The `--save` flag is required to generate the `typings\tsd.d.ts` file,
-You'll need to update `src\server.ts` and change `index.d.ts` to `tsd.d.ts'.
+You'll need to update `src\server.ts` and change `index.d.ts` to `tsd.d.ts`.
 
 ## Build
 
