@@ -22,7 +22,6 @@
   "dependencies": {
     "errorhandler": "^1.5.0",
     "express": "^4.13.4",
-    "history": "^4.6.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router": "^4.1.1",
