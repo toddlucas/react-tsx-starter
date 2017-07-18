@@ -1,19 +1,17 @@
 
 import * as React from 'react';
-import * as Router from 'react-router';
-import { Route, IndexRoute } from 'react-router';
+import { Route, Switch } from 'react-router';
 
-import AppFrame from './views/AppFrame';
-import NotFoundView from './views/NotFoundView';
 import HomeView from './views/HomeView';
 import AboutView from './views/AboutView';
+import NotFoundView from './views/NotFoundView';
 
-var routeMap = (
-    <Route path="/" component={AppFrame}>
-        <IndexRoute component={HomeView}/>
-        <Route path="/about" component={AboutView}/>
-        <Route path="*" component={NotFoundView} />
-    </Route>
+export const RouteMap = () => (
+    <div>
+        <Switch>
+            <Route path="/" exact component={HomeView}/>
+            <Route path="/about" component={AboutView}/>
+            <Route component={NotFoundView} />
+        </Switch>
+    </div>
 );
-
-export default routeMap;

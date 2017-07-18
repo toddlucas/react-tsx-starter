@@ -1,9 +1,6 @@
 {
     "compilerOptions": {
-        "jsx": "react",        
+        "jsx": "react",
         "module": "commonjs"
-    },
-    "files": [
-        "typings/index.d.ts"
-    ]
+    }
 }

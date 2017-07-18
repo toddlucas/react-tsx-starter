@@ -5,12 +5,4 @@ export interface HelloProps {
     name: string;
 }
 
-export default class Hello extends React.Component<HelloProps, any> {
-    constructor(props: HelloProps) {
-        super(props);
-    }
-
-    render() {
-        return <p>Hello, {this.props.name}!</p>;
-    }
-}
+export const Hello = (props: HelloProps) => <p>Hello, {props.name}!</p>;

@@ -1,39 +1,60 @@
 {
   "name": "react-tsx-starter",
   "version": "0.0.1",
-  "description": "Isomorphic React TypeScript Starter Project",
+  "description": "Universal/Isomorphic React TypeScript Starter Project",
   "main": "app.js",
   "author": {
     "name": "Todd Lucas",
     "email": "hi@toddlucas.net"
   },
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toddlucas/react-tsx-starter.git"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev:linux": "NODE_ENV=development node ./www/server.js",
+    "dev:windows": "SET NODE_ENV=development&& node www\\server.js",
+    "build": "gulp"
+  },
   "browserify-shim": {},
   "dependencies": {
+    "errorhandler": "^1.5.0",
     "express": "^4.13.4",
-    "history": "^3.0.0",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
-    "react-router": "^2.2.4",
-    "vash": "^0.12.1"
+    "history": "^4.6.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
-    "browserify": "^13.0.0",
+    "@types/errorhandler": "0.0.30",
+    "@types/express": "^4.0.36",
+    "@types/node": "^8.0.12",
+    "@types/react": "^15.0.38",
+    "@types/react-dom": "^15.5.1",
+    "@types/react-router": "^4.0.14",
+    "@types/react-router-dom": "^4.0.7",
+    "browserify": "^14.4.0",
     "browserify-shim": "^3.8.12",
     "event-stream": "^3.3.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
-    "gulp-cssmin": "^0.1.7",
+    "gulp-cssmin": "^0.2.0",
     "gulp-if": "^2.0.0",
     "gulp-less": "^3.0.5",
-    "gulp-typescript": "^2.13.0",
-    "gulp-uglify": "^1.5.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-typescript": "^3.2.0",
+    "gulp-uglify": "^3.0.0",
     "rimraf": "^2.5.2",
-    "run-sequence": "^1.1.3",
+    "run-sequence": "^2.0.0",
     "stream-browserify": "^2.0.1",
-    "typescript": "^1.8.9",
+    "typescript": "^2.4.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",
-    "yargs": "^4.8.0"
+    "yargs": "^8.0.2"
   }
 }
