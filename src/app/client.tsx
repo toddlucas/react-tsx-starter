@@ -2,11 +2,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import routes from './routes';
+import { BrowserRouter } from 'react-router-dom';
+import { RouteMap } from './routes';
 import store from './store';
 
-ReactDOM.render(<Provider store={store}>
-        <Router history={browserHistory}>{routes}</Router>
+ReactDOM.render(
+    <Provider store={store}>
+        <BrowserRouter><RouteMap /></BrowserRouter>
     </Provider>,
     document.getElementById('body'));

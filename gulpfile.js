@@ -9,8 +9,10 @@ var gulp = require("gulp"),
     concat = require("gulp-concat"),
     cssmin = require("gulp-cssmin"),
     gulpif = require("gulp-if"),
+    rename = require("gulp-rename"),
     uglify = require("gulp-uglify"),
     less = require("gulp-less"),
+    sourcemaps = require('gulp-sourcemaps'),
     browserify = require('browserify'),
     browserifyShim = require('browserify-shim'),
     eventStream = require('event-stream'),
@@ -41,18 +43,21 @@ var build = {
             // Styles
             styles: paths.source + "styles/**/*.css",
             stylesMin: paths.source + "styles/**/*.min.css",
-            less: [paths.source + "styles/*.less"],
+            less: [paths.source + "styles/**/*.less"],
+            app_less: [paths.source + "styles/**.less"],
             
             // Scripts
             scripts: paths.source + "scripts/**/*.js",
             scriptsMin: paths.source + "scripts/**/*.min.js",
             vendor_js: [
-                'history',
+                // 'history',
                 'react',
                 'react-dom',
                 'react-router',
+                'react-router-dom',
+                'react-redux',
                 'redux',
-                'react-redux'
+                'redux-thunk'
             ],
             extern_js: [
                 'node_modules/q/q.js',
@@ -62,7 +67,7 @@ var build = {
             ],
             
             // Miscellaneous files to copy
-            images: [paths.source + 'images/**/*.{jpg,png}'],
+            images: [paths.source + 'images/**/*.{jpg,png,svg}'],
             root: [paths.source + 'favicon.ico'],
             views: [paths.source + 'views/**/*.vash']
         }
@@ -91,6 +96,14 @@ var build = {
 };
 
 //
+// Setup
+//
+
+var typescriptProject = typescript.createProject("tsconfig.json");
+
+var minify = argv.production || argv.staging;
+
+//
 // Basic tasks
 //
 
@@ -111,14 +124,15 @@ gulp.task("clean", [ "clean:scripts", "clean:styles" ]);
 gulp.task("scripts", function () {
     gulp.src([build.input.files.scripts, "!" + build.input.files.scriptsMin], { base: "." })
         .pipe(concat(build.output.files.scripts))
-        .pipe(gulpif(argv.production || argv.staging, uglify()))
+        .pipe(gulpif(minify, uglify()))
+        .pipe(gulpif(minify, rename({ suffix: '.min' })))
         .pipe(gulp.dest("."));
 });
 
 gulp.task("styles", function () {
     gulp.src([build.input.files.styles, "!" + build.input.files.stylesMin])
         .pipe(concat(build.output.files.styles))
-        .pipe(gulpif(argv.production || argv.staging, cssmin()))
+        .pipe(gulpif(minify, cssmin()))
         .pipe(gulp.dest("."));
 });
 
@@ -129,32 +143,22 @@ gulp.task("min", [ "scripts", "styles" ]);
 //
 
 gulp.task('less', function () {
-    return gulp.src(build.input.files.less)
+    return gulp.src(build.input.files.app_less)
+        .pipe(gulpif(!minify, sourcemaps.init()))
         .pipe(less()).on('error', function (err) {
             console.error(err);
             this.emit('end'); // emit the end event, to properly end the task.
         })
-        .pipe(gulpif(argv.production || argv.staging, cssmin()))
+        .pipe(gulpif(!minify, sourcemaps.write()))
+        .pipe(gulpif(minify, cssmin()))
+        .pipe(gulpif(minify, rename({ suffix: '.min' })))
         .pipe(gulp.dest(build.output.dirs.styles));
 });
 
 gulp.task('typescript', function () {
-    var tsResult = gulp
+    return gulp
         .src(build.input.files.ts)
-        .pipe(typescript({
-            noImplicitAny: false,
-            noEmitOnError: true,
-            declarationFiles: true,
-            noExternalResolve: false,
-            removeComments: false,
-            module: "commonjs",
-            diagnostics: true,
-            sourceMap: true,
-            target: "ES5",
-            jsx: "react"
-        }));
-        
-    return tsResult.js
+        .pipe(typescriptProject())
         .pipe(gulp.dest(build.output.dirs.ts));
 });
 
@@ -170,8 +174,9 @@ gulp.task('vendor', function() {
         .pipe(source('vendor.js'))
         // http://stackoverflow.com/questions/24992980/how-to-uglify-output-with-browserify-in-gulp
         // Convert from streaming to buffered vinyl file object for uglify
-        .pipe(gulpif(argv.production || argv.staging, buffer()))
-        .pipe(gulpif(argv.production || argv.staging, uglify()))
+        .pipe(gulpif(minify, buffer()))
+        .pipe(gulpif(minify, uglify()))
+        .pipe(gulpif(minify, rename({ suffix: '.min' })))
         .pipe(gulp.dest(build.output.dirs.scripts));
 });
 
@@ -188,8 +193,9 @@ gulp.task('app', function() {
         .pipe(source('app.js'))
         // http://stackoverflow.com/questions/24992980/how-to-uglify-output-with-browserify-in-gulp
         // Convert from streaming to buffered vinyl file object for uglify
-        .pipe(gulpif(argv.production || argv.staging, buffer()))
-        .pipe(gulpif(argv.production || argv.staging, uglify()))
+        .pipe(gulpif(minify, buffer()))
+        .pipe(gulpif(minify, uglify()))
+        .pipe(gulpif(minify, rename({ suffix: '.min' })))
         .pipe(gulp.dest(build.output.dirs.scripts));
 });
 

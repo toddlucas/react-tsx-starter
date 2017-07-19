@@ -1,49 +1,43 @@
-﻿/// <reference path="../typings/index.d.ts"/>
-
-require('./polyfills/Object.assign');
-
-import express = require('express');
-import http = require('http');
-import path = require('path');
-import React = require('react');
+﻿import * as express from 'express';
+import * as errorHandler from 'errorhandler';
+import * as http from 'http';
+import * as path from 'path';
+import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { match, RouterContext } from 'react-router'
-import * as history from 'history';
+import { StaticRouter } from 'react-router'
 
-import routes from './app/routes';
+import MainPage from './pages/MainPage';
+import { RouteMap } from './app/routes';
 import store from './app/store';
 
-var app = express();
-var memoryHistory = history.createMemoryHistory();
+const app = express();
 
-// all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'vash');
 
-var min = '';
+const env = process.env.NODE_ENV || 'development';
+let min = true;
 
-// development only
-if ('development' == app.get('env')) {
-    //app.use(express.errorHandler());
+if ('development' == env) {
+    console.log('Running in development mode')
+    app.use(errorHandler()); 
+    min = false;
 }
 
 app.use(express.static(path.join(__dirname, '.')));
 
-app.get('/help', function (req, res) {
-    res.render('help', { title: 'Help', min: min });
-})
-
 app.use(function(req, res, next) {
-    const location = memoryHistory.createLocation(req.url);
-    
-    match({ routes, location }, (error, redirectLocation, renderProps: any) => {
-        var html = ReactDOMServer.renderToString(<Provider store={store}>
-            <RouterContext {...renderProps} />
-        </Provider>)
-        return res.render('main', { content: html, title: 'Home', min: min });
-    });
+    const content = ReactDOMServer.renderToString(
+        <Provider store={store}>
+            <StaticRouter location={req.url} context={{}}><RouteMap/></StaticRouter>
+        </Provider>
+    );
+
+    const html = ReactDOMServer.renderToString(
+        <MainPage content={content} min={min} preloadedState={store.getState()} />
+    );
+
+    res.end('<!DOCTYPE html>\r\n' + html);
 });
 
 http.createServer(app).listen(app.get('port'), function () {
