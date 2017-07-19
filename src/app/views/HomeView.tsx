@@ -3,13 +3,13 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Hello } from '../components/Hello';
 
-export interface AboutState {
+export interface HomeState {
     loaded: boolean;
 }
 
-export default class HomeView extends React.Component<{}, AboutState> {
-    constructor(props: any) {
-        super(props);
+export default class HomeView extends React.Component<{}, HomeState> {
+    constructor() {
+        super();
         this.state = { loaded: false };
     }
     
