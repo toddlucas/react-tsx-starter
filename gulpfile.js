@@ -50,10 +50,11 @@ var build = {
             scripts: paths.source + "scripts/**/*.js",
             scriptsMin: paths.source + "scripts/**/*.min.js",
             vendor_js: [
-                'history',
+                // 'history',
                 'react',
                 'react-dom',
-                'react-router'
+                'react-router',
+                'react-router-dom'
             ],
             extern_js: [
                 'node_modules/q/q.js',

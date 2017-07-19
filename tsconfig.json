@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "jsx": "react",
-        "module": "commonjs"
+        "module": "commonjs",
+        "noImplicitAny": true
     }
 }

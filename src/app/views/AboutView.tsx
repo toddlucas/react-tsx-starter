@@ -1,9 +1,13 @@
 ﻿
 import * as React from 'react';
 
-export default class AboutView extends React.Component<any, any> {
-    constructor(props: any) {
-        super(props);
+interface AboutState {
+    loaded: boolean;
+}
+
+export default class AboutView extends React.Component<{}, AboutState> {
+    constructor() {
+        super();
         this.state = { loaded: false };
     }
     

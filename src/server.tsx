@@ -25,18 +25,17 @@ if ('development' == env) {
 app.use(express.static(path.join(__dirname, '.')));
 
 app.use(function(req, res, next) {
-    let content = ReactDOMServer.renderToString(
+    const content = ReactDOMServer.renderToString(
         <StaticRouter location={req.url} context={{}}>
             <RouteMap/>
         </StaticRouter>
     );
 
-    let html = ReactDOMServer.renderToString(
+    const html = ReactDOMServer.renderToString(
         <MainPage content={content} min={min} />
     );
 
-    res.write('<!DOCTYPE html>\r\n' + html);
-    res.end();
+    res.end('<!DOCTYPE html>\r\n' + html);
 });
 
 http.createServer(app).listen(app.get('port'), function () {
