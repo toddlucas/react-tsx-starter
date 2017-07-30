@@ -1,7 +1,6 @@
 
 # Exclude Node.js packages
 node_modules/
-typings/
 
 # Exclude the build output directory
 www/

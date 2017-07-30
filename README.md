@@ -3,7 +3,7 @@
 
 This project includes a working example of React, React Router, and TypeScript.
 
-All the code is in TypeScript, written as either `.ts` or `.tsx` files. 
+All the code is in TypeScript, written as either `.ts` or `.tsx` files.
 The gulp-based build generates a browserified client file which is separate from the vendor file.
 The vendor file currently includes react and react-router.
 This separation speeds up the build process and can result in fewer client downloads when new builds are released.
@@ -81,7 +81,7 @@ You can also use `npm`.
 
 ## Development
 
-Run watch and keep the console open. 
+Run watch and keep the console open.
 
 ```
 > gulp watch
@@ -94,20 +94,7 @@ Gulp will automatically rebuild when a source file or CSS file changes.
 Run this command:
 
 ```
-> cd www
-> node server
-```
-
-Alternatively, using `npm` will also set the NODE_ENV environment variable by running:
-
-```
-> npm run dev:windows
-```
-
-or
-
-```
-> npm run dev:linux
+> npm run dev
 ```
 
 Then open a browser and navigate to [http://localhost:3000](http://localhost:3000) to view.

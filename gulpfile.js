@@ -67,9 +67,7 @@ var build = {
             ],
             
             // Miscellaneous files to copy
-            images: [paths.source + 'images/**/*.{jpg,png,svg}'],
-            root: [paths.source + 'favicon.ico'],
-            views: [paths.source + 'views/**/*.vash']
+            public: [paths.source + 'public/**/*'],
         }
     },
     output: {
@@ -107,19 +105,9 @@ var minify = argv.production || argv.staging;
 // Basic tasks
 //
 
-gulp.task("clean:scripts", function (cb) {
-    rimraf(build.output.files.scripts, cb);
-});
-
-gulp.task("clean:styles", function (cb) {
-    rimraf(build.output.files.styles, cb);
-});
-
-gulp.task("clean:output", function (cb) {
+gulp.task("clean", function (cb) {
     rimraf(paths.output, cb);
 });
-
-gulp.task("clean", [ "clean:scripts", "clean:styles" ]);
 
 gulp.task("scripts", function () {
     gulp.src([build.input.files.scripts, "!" + build.input.files.scriptsMin], { base: "." })
@@ -136,12 +124,6 @@ gulp.task("styles", function () {
         .pipe(gulp.dest("."));
 });
 
-gulp.task("min", [ "scripts", "styles" ]);
-
-//
-// Compilation and packaging
-//
-
 gulp.task('less', function () {
     return gulp.src(build.input.files.app_less)
         .pipe(gulpif(!minify, sourcemaps.init()))
@@ -154,6 +136,10 @@ gulp.task('less', function () {
         .pipe(gulpif(minify, rename({ suffix: '.min' })))
         .pipe(gulp.dest(build.output.dirs.styles));
 });
+
+//
+// Compilation and packaging
+//
 
 gulp.task('typescript', function () {
     return gulp
@@ -203,6 +189,11 @@ gulp.task('app', function() {
 // Copy tasks
 //
 
+gulp.task('public', function() {
+    return gulp.src(build.input.files.public)
+        .pipe(gulp.dest(build.output.dirs.root));
+});
+
 gulp.task('extern', function () {
     return gulp.src(build.input.files.extern_js)
         .pipe(gulp.dest(build.output.dirs.scripts));
@@ -213,22 +204,7 @@ gulp.task('polyfills', function() {
         .pipe(gulp.dest(build.output.dirs.polyfills));
 });
 
-gulp.task('images', function() {
-    return gulp.src(build.input.files.images)
-        .pipe(gulp.dest(build.output.dirs.images));
-});
-
-gulp.task('root', function() {
-    return gulp.src(build.input.files.root)
-        .pipe(gulp.dest(build.output.dirs.root));
-});
-
-gulp.task('views', function () {
-    return gulp.src(build.input.files.views)
-        .pipe(gulp.dest(build.output.dirs.views));
-});
-
-gulp.task('copy', ['scripts', 'styles', /* 'extern', */ 'polyfills', 'images', 'root', 'views'], function(){});
+gulp.task('copy', ['public', 'scripts', 'styles', /* 'extern', 'polyfills' */], function(){});
 
 gulp.task('compile', function(callback) {
     runSequence(['typescript', 'less'], ['vendor', 'app'], callback);
