@@ -16,15 +16,15 @@ app.set('port', process.env.PORT || 3000);
 const env = process.env.NODE_ENV || 'development';
 let min = true;
 
-if ('development' == env) {
+if ('development' === env) {
     console.log('Running in development mode')
-    app.use(errorHandler()); 
+    app.use(errorHandler());
     min = false;
 }
 
 app.use(express.static(path.join(__dirname, '.')));
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     const content = ReactDOMServer.renderToString(
         <StaticRouter location={req.url} context={{}}>
             <RouteMap/>
@@ -35,9 +35,9 @@ app.use(function(req, res, next) {
         <MainPage content={content} min={min} />
     );
 
-    res.end('<!DOCTYPE html>\r\n' + html);
+    res.send('<!DOCTYPE html>\r\n' + html);
 });
 
-http.createServer(app).listen(app.get('port'), function () {
+http.createServer(app).listen(app.get('port'), () => {
     console.log('Express server listening on port ' + app.get('port'));
 });

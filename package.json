@@ -1,6 +1,6 @@
 {
   "name": "react-tsx-starter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Universal/Isomorphic React TypeScript Starter Project",
   "main": "app.js",
   "author": {
@@ -12,8 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/toddlucas/react-tsx-starter.git"
   },
+  "bugs": {
+    "url": "https://github.com/toddlucas/react-tsx-starter/issues"
+  },
   "scripts": {
     "start": "node server.js",
+    "dev": "node ./www/server.js",
     "dev:linux": "NODE_ENV=development node ./www/server.js",
     "dev:windows": "SET NODE_ENV=development&& node www\\server.js",
     "build": "gulp"
