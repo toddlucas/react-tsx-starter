@@ -89,7 +89,7 @@ var build = {
         clean: ['output/*', 'build/*'],
         output_typings: 'output/typings',
         // An intermediate file; output from tsx, input to bundle.
-        client_js: [paths.output + 'app/client.js']
+        client_js: [paths.output + 'client.js']
     }
 };
 
