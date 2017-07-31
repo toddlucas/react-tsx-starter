@@ -2,28 +2,33 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect, DispatchProp } from 'react-redux';
-import { 
-    incrementCounter, 
+import {
+    incrementCounter,
     decrementCounterAsync
 } from '../actions/immediate';
 import { StoreState } from '../store';
 
-export interface StateProps {
+interface OwnProps {
     title: string;
+}
+
+interface StateProps {
     loaded: boolean;
     counter: number;
 }
 
-export interface DispatchProps {
+interface DispatchProps {
     increment: () => void;
     decrementAsync: () => void;
 }
 
-export class AboutView extends React.Component<StateProps & DispatchProps & OwnProps, {}> {
-    constructor(props: StateProps & DispatchProps & OwnProps) {
+type Props = OwnProps & StateProps & DispatchProps;
+
+class AboutView extends React.Component<Props, {}> {
+    constructor(props: Props) {
         super(props);
     }
-    
+
     render() {
         var loading = this.props.loaded ? "" : " (loading...)";
         return <div>
@@ -32,7 +37,7 @@ export class AboutView extends React.Component<StateProps & DispatchProps & OwnP
                 This project includes a working example of React, React Router, and TypeScript.
                 It is <a href="https://github.com/toddlucas/react-tsx-starter">hosted on Github</a>.
             </p>
-            
+
             <h2>Redux example</h2>
             <p>
                 This counter uses actions to update the store.
@@ -49,13 +54,8 @@ export class AboutView extends React.Component<StateProps & DispatchProps & OwnP
     }
 }
 
-export interface OwnProps {
-    title: string;
-}
-
 function mapStateToProps(storeState: StoreState, ownProps: OwnProps): StateProps {
     return {
-        title: ownProps.title,
         loaded: true,
         counter: storeState.sample.counter
     };
