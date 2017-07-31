@@ -12,13 +12,13 @@ export default class HomeView extends React.Component<{}, HomeState> {
         super();
         this.state = { loaded: false };
     }
-    
+
     componentDidMount() {
         this.setState({ loaded: true });
     }
-    
+
     render() {
-        var loading = this.state.loaded ? "" : " (loading...)";
+        const loading = this.state.loaded ? "" : " (loading...)";
         return <div>
             <h2>Home {loading}</h2>
             <Hello name="world" />

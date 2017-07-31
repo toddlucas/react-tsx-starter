@@ -10,13 +10,13 @@ export default class AboutView extends React.Component<{}, AboutState> {
         super();
         this.state = { loaded: false };
     }
-    
+
     componentDidMount() {
         this.setState({ loaded: true });
     }
-    
+
     render() {
-        var loading = this.state.loaded ? "" : " (loading...)";
+        const loading = this.state.loaded ? "" : " (loading...)";
         return <div>
             <h2>About {loading}</h2>
             <p>
