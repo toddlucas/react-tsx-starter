@@ -13,7 +13,7 @@ export default class MainPage extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
     }
-    
+
     render() {
         // Add helmet to control title at the view level
         // const helmet = Helmet.rewind();
@@ -25,7 +25,7 @@ export default class MainPage extends React.Component<any, any> {
                 <head>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    
+
                     {/*
                     {helmet.meta.toComponent()}
                     {helmet.title.toComponent()}

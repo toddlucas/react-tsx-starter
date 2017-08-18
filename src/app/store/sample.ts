@@ -6,9 +6,12 @@ export interface SampleState {
     counter: number;
 }
 
-export default function sampleReducer(state: SampleState = {
-    counter: 0
-}, action: Action): SampleState {
+export default function sampleReducer(
+    state: SampleState = {
+        counter: 0
+    },
+    action: Action): SampleState {
+
     switch (action.type) {
     case INCREMENT_COUNTER:
         // Using a polyfill
@@ -18,7 +21,7 @@ export default function sampleReducer(state: SampleState = {
         return {
             ...state,
             counter: state.counter - 1
-        }
+        };
     }
     return state;
 }

@@ -20,7 +20,7 @@ const rootReducer = combineReducers<StoreState>({
 });
 
 // Load initial state on the client.
-let preloadedState: StoreState = undefined;
+let preloadedState: StoreState;
 if (typeof window !== 'undefined') {
     preloadedState = window.__PRELOADED_STATE__;
 }

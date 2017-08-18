@@ -30,7 +30,7 @@ class AboutView extends React.Component<Props, {}> {
     }
 
     render() {
-        var loading = this.props.loaded ? "" : " (loading...)";
+        const loading = this.props.loaded ? "" : " (loading...)";
         return <div>
             <h2>About {loading}</h2>
             <p>

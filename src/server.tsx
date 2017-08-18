@@ -5,7 +5,7 @@ import * as path from 'path';
 import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router'
+import { StaticRouter } from 'react-router';
 
 import MainPage from './pages/MainPage';
 import { RouteMap } from './app/routes';
@@ -19,7 +19,7 @@ const env = process.env.NODE_ENV || 'development';
 let min = true;
 
 if ('development' === env) {
-    console.log('Running in development mode')
+    console.log('Running in development mode');
     app.use(errorHandler());
     min = false;
 }
