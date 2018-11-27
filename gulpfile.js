@@ -15,12 +15,10 @@ var gulp = require("gulp"),
     sourcemaps = require('gulp-sourcemaps'),
     browserify = require('browserify'),
     browserifyShim = require('browserify-shim'),
-    eventStream = require('event-stream'),
     typescript = require("gulp-typescript"),
     runSequence = require('run-sequence'),
     buffer = require('vinyl-buffer'),
-    source = require('vinyl-source-stream'),
-    transform = require('vinyl-transform');
+    source = require('vinyl-source-stream');
 
 //
 // Configuration
@@ -107,7 +105,7 @@ gulp.task("clean", function (cb) {
 });
 
 gulp.task("scripts", function () {
-    gulp.src([build.input.files.scripts, "!" + build.input.files.scriptsMin], { base: "." })
+    return gulp.src([build.input.files.scripts, "!" + build.input.files.scriptsMin], { base: "." })
         .pipe(concat(build.output.files.scripts))
         .pipe(gulpif(minify, uglify()))
         .pipe(gulpif(minify, rename({ suffix: '.min' })))
@@ -115,7 +113,7 @@ gulp.task("scripts", function () {
 });
 
 gulp.task("styles", function () {
-    gulp.src([build.input.files.styles, "!" + build.input.files.stylesMin])
+    return gulp.src([build.input.files.styles, "!" + build.input.files.stylesMin])
         .pipe(concat(build.output.files.styles))
         .pipe(gulpif(minify, cssmin()))
         .pipe(gulp.dest("."));
@@ -200,22 +198,20 @@ gulp.task('polyfills', function() {
         .pipe(gulp.dest(build.output.dirs.polyfills));
 });
 
-gulp.task('copy', ['public', 'scripts', 'styles', /* 'extern', 'polyfills' */], function(){});
+gulp.task('copy', gulp.parallel('public', 'scripts', 'styles' /* 'extern', 'polyfills' */));
 
-gulp.task('compile', function(callback) {
-    runSequence(['typescript', 'less'], ['vendor', 'app'], callback);
-});
+gulp.task('compile', 
+    gulp.series(
+        gulp.parallel('typescript', 'less'),
+        gulp.parallel('vendor', 'app')));
 
-gulp.task('recompile', function(callback) {
-    runSequence('typescript', 'app', callback);
-});
+gulp.task('recompile', gulp.series('typescript', 'app'));
 
 gulp.task('watch', function() {
-    gulp.watch(build.input.files.ts, ['recompile']);
-    gulp.watch(build.input.files.views, ['views']);
-    gulp.watch(build.input.files.styles, ['styles']);
-    gulp.watch(build.input.files.less, ['less']);
+    gulp.watch(build.input.files.ts, gulp.series('recompile'));
+    gulp.watch(build.input.files.styles, gulp.series('styles'));
+    gulp.watch(build.input.files.less, gulp.series('less'));
 });
 
 // The default task (called when running 'gulp' from the command line).
-gulp.task('default', ['copy', 'compile'], function(){});
+gulp.task('default', gulp.parallel('copy', 'compile'));
