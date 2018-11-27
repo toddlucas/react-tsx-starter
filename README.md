@@ -56,7 +56,7 @@ This will get all the packages required for development and run time,
 as defined in the `package.json` file.
 
 ```
-> npm update
+> npm install
 ```
 
 ### Install TypeScript definitions
