@@ -17,9 +17,9 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "node ./www/server.js",
-    "dev:linux": "NODE_ENV=development node ./www/server.js",
-    "dev:windows": "SET NODE_ENV=development&& node www\\server.js",
+    "dev": "node ./dist/server.js",
+    "dev:linux": "NODE_ENV=development node ./dist/server.js",
+    "dev:windows": "SET NODE_ENV=development&& node dist\\server.js",
     "build": "gulp"
   },
   "browserify-shim": {},

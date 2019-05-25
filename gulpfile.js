@@ -26,7 +26,7 @@ var gulp = require("gulp"),
 
 var paths = {
     source: "./src/",
-    output: "./www/"
+    output: "./dist/"
 };
 
 var build = {
