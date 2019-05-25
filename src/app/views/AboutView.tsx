@@ -1,7 +1,8 @@
 ﻿
 import * as React from 'react';
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
 import { connect, DispatchProp } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import {
     incrementCounter,
     decrementCounterAsync
@@ -61,7 +62,7 @@ function mapStateToProps(storeState: StoreState, ownProps: OwnProps): StateProps
     };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<StoreState>): DispatchProps {
+function mapDispatchToProps(dispatch: ThunkDispatch<StoreState, void, Action>): DispatchProps {
     return {
         increment: () => dispatch(incrementCounter()),
         decrementAsync: () => dispatch(decrementCounterAsync())
