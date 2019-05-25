@@ -6,8 +6,8 @@ interface AboutState {
 }
 
 export default class AboutView extends React.Component<{}, AboutState> {
-    constructor() {
-        super();
+    constructor(props: Readonly<{}>) {
+        super(props);
         this.state = { loaded: false };
     }
 

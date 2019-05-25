@@ -8,8 +8,8 @@ export interface HomeState {
 }
 
 export default class HomeView extends React.Component<{}, HomeState> {
-    constructor() {
-        super();
+    constructor(props: Readonly<{}>) {
+        super(props);
         this.state = { loaded: false };
     }
 
