@@ -16,9 +16,10 @@ var gulp = require("gulp"),
     browserify = require('browserify'),
     browserifyShim = require('browserify-shim'),
     typescript = require("gulp-typescript"),
-    runSequence = require('run-sequence'),
     buffer = require('vinyl-buffer'),
-    source = require('vinyl-source-stream');
+    source = require('vinyl-source-stream'),
+    nodemon = require('gulp-nodemon'),
+    browserSync = require('browser-sync').create();
 
 //
 // Configuration
@@ -68,7 +69,8 @@ var build = {
     output: {
         files: {
             styles: paths.output + "styles/site.css",
-            scripts: paths.output + "scripts/site.js"
+            scripts: paths.output + "scripts/site.js",
+            all: paths.output + "**/*"
         },
         dirs: {
             ts: paths.output,
@@ -83,6 +85,7 @@ var build = {
     other: {
         clean: ['output/*', 'build/*'],
         output_typings: 'output/typings',
+        server_js: paths.output + 'server.js',
         // An intermediate file; output from tsx, input to bundle.
         client_js: [paths.output + 'client.js']
     }
@@ -200,6 +203,10 @@ gulp.task('polyfills', function() {
 
 gulp.task('copy', gulp.parallel('public', 'scripts', 'styles' /* 'extern', 'polyfills' */));
 
+//
+// Build tasks
+//
+
 gulp.task('compile', 
     gulp.series(
         gulp.parallel('typescript', 'less'),
@@ -212,6 +219,30 @@ gulp.task('watch', function() {
     gulp.watch(build.input.files.styles, gulp.series('styles'));
     gulp.watch(build.input.files.less, gulp.series('less'));
 });
+
+//
+// Hot reload tasks
+//
+
+gulp.task("nodemon", function (cb) {
+    // https://gist.github.com/sogko/b53d33d4f3b40d3b4b2e#gistcomment-2795936
+    return nodemon({
+        script: build.other.server_js,
+        watch: [build.output.files.all],
+    }).on("start", () => {
+        cb();
+    });
+});
+
+gulp.task('browser-sync', function () {
+    browserSync.init(null, {
+        proxy: "http://localhost:3000",
+        files: [build.output.files.all],
+        port: 3002
+    });
+});
+
+gulp.task("serve", gulp.parallel('watch', gulp.series('nodemon', 'browser-sync')));
 
 // The default task (called when running 'gulp' from the command line).
 gulp.task('default', gulp.parallel('copy', 'compile'));
