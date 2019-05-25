@@ -31,10 +31,10 @@ In order to keep the starter as clean as possible, the Redux example is on a bra
 
 This template supports the following versions for key dependencies:
 
-* [React](https://facebook.github.io/react/) 15.6
-* [React Router](https://github.com/rackt/react-router) 4.1
-* [Redux](https://github.com/reactjs/redux) 3.7 ([redux branch](https://github.com/toddlucas/react-tsx-starter/tree/redux))
-* [TypeScript](http://www.typescriptlang.org/) 1.6 - 2.4
+* [React](https://facebook.github.io/react/) 16.8
+* [React Router](https://github.com/rackt/react-router) 5.0
+* [Redux](https://github.com/reactjs/redux) 4.0 ([redux branch](https://github.com/toddlucas/react-tsx-starter/tree/redux))
+* [TypeScript](http://www.typescriptlang.org/) 3.4
 
 # Usage
 
@@ -58,12 +58,6 @@ as defined in the `package.json` file.
 ```
 > npm install
 ```
-
-### Install TypeScript definitions
-
-Typings files are now installed using `npm`.
-The starter typings should be installed with the above `npm update` step.
-The older `typings` (and even older `tsd`) process is no longer needed for most packages.
 
 ## Build
 
@@ -98,6 +92,18 @@ Run this command:
 ```
 
 Then open a browser and navigate to [http://localhost:3000](http://localhost:3000) to view.
+
+You can also run the server with automatic reloading using [nodemon](https://nodemon.io/) and [BrowserSync](https://www.browsersync.io/).
+
+```
+> gulp serve
+```
+
+This will launch at a different port since it proxies [Express](https://expressjs.com/).
+
+## Related
+
+A simple starter project can be found at [react-tsx-lite](https://github.com/toddlucas/react-tsx-lite).
 
 ## License
 

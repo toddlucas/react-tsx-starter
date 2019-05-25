@@ -34,7 +34,7 @@ export default class MainPage extends React.Component<any, any> {
                     <title>Starter</title>
 
                     <link rel="shortcut icon" href="/favicon.ico" />
-                    <link href={`/styles/app${suffix}.css`} rel="stylesheet" media="screen" />
+                    {/*<link href={`/styles/app${suffix}.css`} rel="stylesheet" media="screen" />*/}
                     <link href={`/styles/site${suffix}.css`} rel="stylesheet" media="screen" />
                 </head>
                 <body>

@@ -3,4 +3,4 @@
 node_modules/
 
 # Exclude the build output directory
-www/
+dist/
