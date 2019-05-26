@@ -24,7 +24,7 @@ if ('development' === env) {
     min = false;
 }
 
-app.use(express.static(path.join(__dirname, '.')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
     const content = ReactDOMServer.renderToString(

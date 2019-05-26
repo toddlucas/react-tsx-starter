@@ -27,7 +27,8 @@ var gulp = require("gulp"),
 
 var paths = {
     source: "./src/",
-    output: "./dist/"
+    output: "./dist/",
+    public: "./dist/public/"
 };
 
 var build = {
@@ -71,26 +72,24 @@ var build = {
     },
     output: {
         files: {
-            styles: paths.output + "styles/site.css",
-            scripts: paths.output + "scripts/site.js",
-            all: paths.output + "**/*"
+            styles: paths.public + "styles/site.css",
+            scripts: paths.public + "scripts/site.js",
+            all: paths.public + "**/*",
+            // An intermediate file; output from tsx, input to bundle.
+            client_js: [paths.output + 'client.js'],
+            server_js: paths.output + 'server.js',
         },
         dirs: {
             ts: paths.output,
-            images: paths.output + 'images',
-            root: paths.output,
-            styles: paths.output + 'styles',
-            scripts: paths.output + 'scripts',
-            polyfills: paths.output + 'polyfills',
-            views: paths.output + 'views'
+            public: paths.public,
+            images: paths.public + 'images',
+            styles: paths.public + 'styles',
+            scripts: paths.public + 'scripts',
+            polyfills: paths.object + 'polyfills',
         }
     },
     other: {
-        clean: ['output/*', 'build/*'],
-        output_typings: 'output/typings',
-        server_js: paths.output + 'server.js',
-        // An intermediate file; output from tsx, input to bundle.
-        client_js: [paths.output + 'client.js']
+        clean: ['dist/*'],
     }
 };
 
@@ -170,7 +169,7 @@ gulp.task('vendor', function() {
 gulp.task('app', function() {
     return browserify({
             insertGlobals: true,
-            entries: build.other.client_js
+            entries: build.output.files.client_js
         })
         .transform(browserifyShim)
         .external(build.input.files.vendor_js)
@@ -192,7 +191,7 @@ gulp.task('app', function() {
 
 gulp.task('public', function() {
     return gulp.src(build.input.files.public)
-        .pipe(gulp.dest(build.output.dirs.root));
+        .pipe(gulp.dest(build.output.dirs.public));
 });
 
 gulp.task('extern', function () {
@@ -231,7 +230,7 @@ gulp.task('watch', function() {
 gulp.task("nodemon", function (cb) {
     // https://gist.github.com/sogko/b53d33d4f3b40d3b4b2e#gistcomment-2795936
     return nodemon({
-        script: build.other.server_js,
+        script: build.output.files.server_js,
         watch: [build.output.files.all],
     }).on("start", () => {
         cb();
