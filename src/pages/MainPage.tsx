@@ -7,7 +7,7 @@ export interface MainProps {
     min: boolean;
 }
 
-export default class MainPage extends React.Component<any, any> {
+export default class MainPage extends React.Component<MainProps, any> {
     constructor(props: any) {
         super(props);
     }
