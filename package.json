@@ -25,7 +25,7 @@
   "browserify-shim": {},
   "dependencies": {
     "errorhandler": "^1.5.1",
-    "express": "^4.17.0",
+    "express": "^4.17.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
